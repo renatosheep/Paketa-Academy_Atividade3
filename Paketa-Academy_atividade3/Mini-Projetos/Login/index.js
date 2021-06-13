@@ -8,10 +8,9 @@ function validate() {
     }else {   
         let a1 = document.querySelector("#user");
         let a2 = a1.value;
-        alert(`O usuário é ${a2}`); 
         let a3 = document.querySelector("#pass");
         let a4 = a3.value;
-        alert(`A senha é ${a4}`);        
+        alert(`O usuário é ${a2} e a senha é ${a4}`);      
     }
 }
 

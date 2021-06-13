@@ -1,26 +1,63 @@
-const result = document.getElementById('result');
-const filter = document.getElementById('filter');
+let result = document.getElementById('result');
 
-const dogs = [{
+let DOGS = {
 	'akita': {
-		name: 'Akita'
+		name: 'Akita',
+		img: './Imagens/Akita.jpg'
 	},
 	'border': {
-		name: 'Border Collie'
+		name: 'Border Collie',
+		img: './Imagens/Border.jpg'
 	},
 	'husky': {
-		name: 'Husky Siberiano'
+		name: 'Husky Siberiano',
+		img: './Imagens/Husky.jpg'
 	},
 	'malamute': {
-		name: 'Malamute do Alaska'
+		name: 'Malamute do Alaska',
+		img: './Imagens/Malamute.jpg'
 	},
 	'samoieda': {
-		name: 'Samoieda'
+		name: 'Samoieda',
+		img: './Imagens/Samoieda.jpg'
 	},
-}]
+}
 
-dogs.filter(dogs => console.log((dogs.name).includes('Akita')))
-console.log(filter.value)
-console.log
-//users.filter(user => (user.name).includes(valorDigitado))
+function renderDogs(dogs){
+	function item(dog) {
+		return `
+			<li>
+				<img src=${dog.img} >
+				<span>${dog.name}</span>				
+			</li>
+		`
+	}
+	const elements = Object.keys(dogs).map((dog, index) => {
+		return item(dogs[dog])
+	})
+	document.querySelector("#result").insertAdjacentHTML('beforeend', elements)
+}
+
+function filter(valorDigitado){
+	let newDogs = [] 
+	
+	
+	Object.keys(DOGS).forEach(dog => {
+		if ((DOGS[dog].name).includes(valorDigitado)) {
+			newDogs.push(DOGS[dog]) 
+		}
+	}) 
+	document.querySelector("#result").innerHTML = ''
+	console.log('newDogs', newDogs)
+	renderDogs(newDogs)
+} 
+
+const filterElement = document.querySelector('#filter');
+
+filterElement.addEventListener('change', (event) => {
+	const value = event.target.value
+	filter(value)
+});
+
+	renderDogs(DOGS)
 
