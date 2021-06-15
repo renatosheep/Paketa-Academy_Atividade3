@@ -41,7 +41,6 @@ function renderDogs(dogs){
 function filter(valorDigitado){
 	let newDogs = [] 
 	
-	
 	Object.keys(DOGS).forEach(dog => {
 		if ((DOGS[dog].name).includes(valorDigitado)) {
 			newDogs.push(DOGS[dog]) 
