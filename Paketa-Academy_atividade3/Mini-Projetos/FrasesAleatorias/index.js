@@ -30,18 +30,23 @@ function renderMGS(mgs){
 		`
 	}
 	const elements = Object.keys(mgs).map((items, index) => {
-		return item(mgs[items])
+		return item(mgs)
 	})
 	texto.insertAdjacentHTML('beforeend', elements)
 }
 
+
 function filter(){
-	let newMGS = [] 
-		
-	Object.keys(MGS).forEach(items => {
-			newMGS.push(MGS[items]) 
-	}) 
+	let newMGS = ''
+	let max = MGS.length
+	
+	Object.keys(MGS).forEach( () => {
+
+		newMGS = MGS[Math.floor(Math.random() * max)]
+
+	})
+	texto.innerHTML = ''
 	renderMGS(newMGS)
 } 
 
-renderMGS(MGS)
+renderMGS(MGS[0])
