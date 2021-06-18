@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Sitema de Votos</h1>
+            <textarea id="textarea" placeholder="Digite aqui sua sugestão de filme..."></textarea>
+        </div>
+    </header>
+    <main>
+        <small>Votos</small>
+        <div class="container">
+            <div class="voting">
+                <div class="suggestion">
+                    <strong>Senhor dos Anéis</strong>
+                    <button id="likebtn">
+                        <i class="fa fa-thumbs-up"></i>
+                    </button>
+                    <input type="number" id="input1" value="0" name="">
+                    <button id="dislikebtn">
+                        <i class="fa fa-thumbs-down"></i>
+                    </button>
+                    <input type="number" id="input2" value="0" name="">
+                </div>               
+            </div>
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>

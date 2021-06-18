@@ -10,14 +10,9 @@ h1 {
 }
 
 .container {
-    width: 400px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
     position:absolute;
-    top:50%;
+    top:30%;
     left:50%;
-    transform: translate(-32%, -30%);
+    transform: translate(-32%, 0%);
 }
 
