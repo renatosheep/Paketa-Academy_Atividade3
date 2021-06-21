@@ -1,54 +1,81 @@
-let likebtn = document.querySelector('#likebtn');
-let dislikebtn = document.querySelector('#dislikebtn');
-let input1 = document.querySelector('#input1');
-let input2 = document.querySelector('#input2');
-const textarea = document.getElementById('#textarea');
-const container = document.getElementById('.voting');
-
-likebtn.addEventListener('click', () => {
-    input1.value = parseInt(input1.value) + 1;
-    input1.style.color = "#12ff00";
-})
-
-dislikebtn.addEventListener('click', () => {
-    input2.value = parseInt(input2.value) + 1;
-    input2.style.color = "#ff0000";
-})
+let textArea = document.querySelector('#txtarea')
+let container = document.querySelector('.container')
+let sugestionContainer = document.querySelector('.suggestion-container')
+let suggestionsCount = document.querySelector('.suggestions-count--strong')
+let suggestionsBlock = document.querySelectorAll('.suggestion-block')
+let btnVote = document.querySelectorAll('.btn-count')
 
 
-textarea.addEventListener('keypress', (e) => {
-	if(e.key === 'Enter') {
-		addSuggestionToDOM(e.target.value.trim());
-		
-		setTimeout(() => {
-			textarea.value = '';
-		}, 10);
-	}
-});
+let newSuggestion
+let allSuggestions = []
 
-function addSuggestionToDOM(suggestionText) {
-	const newSuggestion = document.createElement('div');
-	newSuggestion.classList.add('suggestion');
-	newSuggestion.innerHTML = `
-                <div class="voting">
-                    <div class="suggestion">
-                        <strong>${suggestionText}</strong>
-                    <button id="likebtn">
-                        <i class="fa fa-thumbs-up"></i>
+const textAreaEnter = () => {
+    let count = 1
+    textArea.addEventListener('keydown', (e) => {
+        
+        if(e.key === 'Enter'){
+            let txtAreaValue = document.querySelector("#txtarea").value
+            e.preventDefault()
+            newSuggestion = `
+            <div id="suggestion-block" class="suggestion-block">
+                <div class="vote-container">
+                    <button class="btn-count">
+                        <i class="fas fa-chevron-up"></i>
                     </button>
-                    <input type="number" id="input1" value="0" name="">
-                    <button id="dislikebtn">
-                        <i class="fa fa-thumbs-down"></i>
-                    </button>
-                    <input type="number" id="input2" value="0" name="">
+                    <p class="count-votes">
+                        <span class="count-numbers">0</span>
+                        votes
+                    </p>
                 </div>
-    `;
+                <div class="suggestions">
+                    <strong class="suggestions--strong">${txtAreaValue}</strong>
+                </div>
+            </div>
+            `
+            allSuggestions = [...allSuggestions, newSuggestion]
 
-	container.appendChild(newSuggestion);
-
+            count++
+            suggestionsCount.innerText = count
+            sugestionContainer.innerHTML += newSuggestion
+            document.querySelector("#txtarea").value = ""
+        }
+        if(textArea==''){
+            alert('Digite algo')
+        }
+    })
 }
 
+const setVote = () => {
+    container.addEventListener('click', (e) => {
+        const btn = e.path.find(el => el.classList && el.classList.contains('btn-count'))
+        console.log("listener container")
+        if(btn){
+            const block = e.path.find(el => el.classList && el.classList.contains('suggestion-block'))
+            console.log("event btn")
+            if(btn.classList.contains('voted')){
+                btn.classList.remove('voted')
+                unvote(block)
+            }else{
+                btn.classList.add('voted')
+                vote(block)
+            }
+        }
+    })
+}
 
+const vote = (el) => {
+    let vBtn = el.querySelector('.count-numbers')
+    vBtn.innerText = +vBtn.innerText + 1
+}
 
+const unvote = (el) => {
+    let vBtn = el.querySelector('.count-numbers')
+    vBtn.innerText = +vBtn.innerText - 1
+}
 
+const init = () => {
+    textAreaEnter()
+    setVote()
+}
 
+init()
